@@ -1,26 +1,18 @@
 package solver;
 
-import java.util.Scanner;
-
 public class Main {
 
 	public static void main(String[] args) {
 
-		Scanner scanner = new Scanner(System.in);
-
-		double a = scanner.nextDouble();
-		double b = scanner.nextDouble();
-		double c = scanner.nextDouble();
-
-		double d = scanner.nextDouble();
-		double e = scanner.nextDouble();
-		double f = scanner.nextDouble();
-
-		scanner.close();
-
-		double y = (f - c * d / a) / (e - b * d / a);
-		double x = (c - b * y) / a;
+		ArgumentResolver argumentResolver = new ArgumentResolver(args);
 		
-		System.out.println(x + " " + y);
+		InputFileReader reader = new InputFileReader(argumentResolver.getInputFile());
+		reader.read();
+		
+		LinearEquation linearEquation = new LinearEquation(reader.getVariables(), reader.getData());
+		linearEquation.solve();
+		
+		OutputFileWriter writer = new OutputFileWriter(argumentResolver.getOutputFile());
+		writer.write(linearEquation.getResult());
 	}
 }
