@@ -2,8 +2,8 @@ package solver;
 
 public class LinearEquation {
 
-	private int variables;
-	private double[][] data;
+	private final int variables;
+	private final double[][] data;
 
 	public LinearEquation(int variables, double[][] data) {
 

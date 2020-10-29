@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class OutputFileWriter {
 
-	private File outputFile;
+	private final File outputFile;
 
 	public OutputFileWriter(File outputFile) {
 		this.outputFile = outputFile;

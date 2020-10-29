@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class InputFileReader {
 
-	private File inputFile;
+	private final File inputFile;
+	
 	private int variables;
 	private double[][] data;
 
