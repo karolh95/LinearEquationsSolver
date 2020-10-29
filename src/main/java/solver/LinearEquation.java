@@ -5,10 +5,10 @@ public class LinearEquation {
 	private final int variables;
 	private final double[][] data;
 
-	public LinearEquation(int variables, double[][] data) {
+	public LinearEquation(InputFileReader reader) {
 
-		this.variables = variables;
-		this.data = data;
+		this.variables = reader.getVariables();
+		this.data = reader.getData();
 	}
 
 	public double[] getResult() {

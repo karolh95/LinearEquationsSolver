@@ -9,7 +9,7 @@ public class Main {
 		InputFileReader reader = new InputFileReader(argumentResolver.getInputFile());
 		reader.read();
 		
-		LinearEquation linearEquation = new LinearEquation(reader.getVariables(), reader.getData());
+		LinearEquation linearEquation = new LinearEquation(reader);
 		linearEquation.solve();
 		
 		OutputFileWriter writer = new OutputFileWriter(argumentResolver.getOutputFile());
