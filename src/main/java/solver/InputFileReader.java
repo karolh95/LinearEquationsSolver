@@ -7,38 +7,40 @@ import java.util.Scanner;
 public class InputFileReader {
 
 	private final File inputFile;
-	
+
 	private int coefficientsNumber;
-	private double[][] data;
+	private Equation[] equations;
 
 	public InputFileReader(File inputFile) {
 		this.inputFile = inputFile;
 	}
 
 	public void read() {
-		
+
 		Scanner scanner;
 		try {
 			scanner = new Scanner(inputFile);
 
 			coefficientsNumber = scanner.nextInt();
 
-			data = new double[coefficientsNumber][];
+			equations = new Equation[coefficientsNumber];
 
 			for (int i = 0; i < coefficientsNumber; i++) {
 
-				data[i] = new double[coefficientsNumber + 1];
+				double[] data = new double[coefficientsNumber + 1];
 
 				for (int j = 0; j < coefficientsNumber + 1; j++) {
-					data[i][j] = scanner.nextDouble();
+					data[j] = scanner.nextDouble();
 				}
+
+				equations[i] = new Equation(data);
 			}
 			scanner.close();
-			
+
 		} catch (FileNotFoundException e) {
 
 			coefficientsNumber = 0;
-			data = new double[0][0];
+			equations = new Equation[0];
 		}
 	}
 
@@ -46,7 +48,7 @@ public class InputFileReader {
 		return coefficientsNumber;
 	}
 
-	public double[][] getData() {
-		return data;
+	public Equation[] getEquations() {
+		return equations;
 	}
 }

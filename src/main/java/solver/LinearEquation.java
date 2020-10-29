@@ -3,20 +3,20 @@ package solver;
 public class LinearEquation {
 
 	private final int coefficientsNumber;
-	private final double[][] data;
+	private final Equation[] equations;
 
 	public LinearEquation(InputFileReader reader) {
 
 		this.coefficientsNumber = reader.getCoefficientsNumber();
-		this.data = reader.getData();
+		this.equations = reader.getEquations();
 	}
 
 	public double[] getResult() {
 
 		double[] result = new double[coefficientsNumber];
 
-		for (int i = 0; i < coefficientsNumber; i++) {
-			result[i] = data[i][coefficientsNumber];
+		for (int i = 0; i < equations.length; i++) {
+			result[i] = equations[i].get(coefficientsNumber);
 		}
 
 		return result;
@@ -31,34 +31,20 @@ public class LinearEquation {
 
 	private void solveColumn(int column) {
 
-		selfDivideRow(column);
+		double divider = getDiagonal(column);
+		equations[column].divide(divider);
 
 		for (int row = 0; row < coefficientsNumber; row++) {
 
 			if (row != column) {
-				subtractRow(data[row], data[column], data[row][column]);
+
+				double multiplier = equations[row].get(column);
+				equations[row].subtract(equations[column], multiplier);
 			}
 		}
 	}
 
-	private void selfDivideRow(int row) {
-
-		double divider = data[row][row];
-
-		divideRow(data[row], divider);
-	}
-
-	private void divideRow(double[] row, double value) {
-
-		for (int i = 0; i < coefficientsNumber + 1; i++) {
-			row[i] /= value;
-		}
-	}
-
-	private void subtractRow(double[] row, double[] subtract, double multiplier) {
-
-		for (int i = 0; i < coefficientsNumber + 1; i++) {
-			row[i] -= multiplier * subtract[i];
-		}
+	private double getDiagonal(int index) {
+		return equations[index].get(index);
 	}
 }
