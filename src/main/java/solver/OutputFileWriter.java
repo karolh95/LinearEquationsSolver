@@ -17,22 +17,22 @@ public class OutputFileWriter {
 	public void write(double[] result) {
 
 		try {
-			
+
 			PrintWriter writer = new PrintWriter(outputFile);
-			
+
 			NumberFormat formatter = NumberFormat.getNumberInstance(Locale.UK);
-			
+
 			formatter.setMinimumFractionDigits(1);
-			
-			for (int i = 0; i < result.length; i++) {
-				
-				writer.printf("%s\n", formatter.format(result[i]));
+
+			for (double variable : result) {
+
+				writer.printf("%s\n", formatter.format(variable));
 			}
-			
+
 			writer.close();
 
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
