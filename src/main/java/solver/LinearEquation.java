@@ -2,21 +2,21 @@ package solver;
 
 public class LinearEquation {
 
-	private final int variables;
+	private final int coefficientsNumber;
 	private final double[][] data;
 
 	public LinearEquation(InputFileReader reader) {
 
-		this.variables = reader.getVariables();
+		this.coefficientsNumber = reader.getCoefficientsNumber();
 		this.data = reader.getData();
 	}
 
 	public double[] getResult() {
 
-		double[] result = new double[variables];
+		double[] result = new double[coefficientsNumber];
 
-		for (int i = 0; i < variables; i++) {
-			result[i] = data[i][variables];
+		for (int i = 0; i < coefficientsNumber; i++) {
+			result[i] = data[i][coefficientsNumber];
 		}
 
 		return result;
@@ -24,7 +24,7 @@ public class LinearEquation {
 
 	public void solve() {
 
-		for (int column = 0; column < variables; column++) {
+		for (int column = 0; column < coefficientsNumber; column++) {
 			solveColumn(column);
 		}
 	}
@@ -33,7 +33,7 @@ public class LinearEquation {
 
 		selfDivideRow(column);
 
-		for (int row = 0; row < variables; row++) {
+		for (int row = 0; row < coefficientsNumber; row++) {
 
 			if (row != column) {
 				subtractRow(data[row], data[column], data[row][column]);
@@ -50,14 +50,14 @@ public class LinearEquation {
 
 	private void divideRow(double[] row, double value) {
 
-		for (int i = 0; i < variables + 1; i++) {
+		for (int i = 0; i < coefficientsNumber + 1; i++) {
 			row[i] /= value;
 		}
 	}
 
 	private void subtractRow(double[] row, double[] subtract, double multiplier) {
 
-		for (int i = 0; i < variables + 1; i++) {
+		for (int i = 0; i < coefficientsNumber + 1; i++) {
 			row[i] -= multiplier * subtract[i];
 		}
 	}

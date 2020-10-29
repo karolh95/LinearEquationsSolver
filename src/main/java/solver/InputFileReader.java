@@ -8,7 +8,7 @@ public class InputFileReader {
 
 	private final File inputFile;
 	
-	private int variables;
+	private int coefficientsNumber;
 	private double[][] data;
 
 	public InputFileReader(File inputFile) {
@@ -21,15 +21,15 @@ public class InputFileReader {
 		try {
 			scanner = new Scanner(inputFile);
 
-			variables = scanner.nextInt();
+			coefficientsNumber = scanner.nextInt();
 
-			data = new double[variables][];
+			data = new double[coefficientsNumber][];
 
-			for (int i = 0; i < variables; i++) {
+			for (int i = 0; i < coefficientsNumber; i++) {
 
-				data[i] = new double[variables + 1];
+				data[i] = new double[coefficientsNumber + 1];
 
-				for (int j = 0; j < variables + 1; j++) {
+				for (int j = 0; j < coefficientsNumber + 1; j++) {
 					data[i][j] = scanner.nextDouble();
 				}
 			}
@@ -37,13 +37,13 @@ public class InputFileReader {
 			
 		} catch (FileNotFoundException e) {
 
-			variables = 0;
+			coefficientsNumber = 0;
 			data = new double[0][0];
 		}
 	}
 
-	public int getVariables() {
-		return variables;
+	public int getCoefficientsNumber() {
+		return coefficientsNumber;
 	}
 
 	public double[][] getData() {
