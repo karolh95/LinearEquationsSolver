@@ -13,6 +13,6 @@ public class Main {
 		linearEquation.solve();
 		
 		OutputFileWriter writer = new OutputFileWriter(argumentResolver.getOutputFile());
-		writer.write(linearEquation.getResult());
+		writer.write(linearEquation);
 	}
 }

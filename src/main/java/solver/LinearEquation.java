@@ -4,11 +4,19 @@ public class LinearEquation {
 
 	private final int coefficientsNumber;
 	private final Equation[] equations;
+	
+	private EquationResult equationResult;
 
 	public LinearEquation(InputFileReader reader) {
 
 		this.coefficientsNumber = reader.getCoefficientsNumber();
 		this.equations = reader.getEquations();
+		
+		this.equationResult = EquationResult.NONE;
+	}
+	
+	public EquationResult getEquationResult() {
+		return equationResult;
 	}
 
 	public double[] getResult() {
@@ -42,6 +50,8 @@ public class LinearEquation {
 				equations[row].subtract(equations[column], multiplier);
 			}
 		}
+		
+		equationResult = EquationResult.ONE;
 	}
 
 	private double getDiagonal(int index) {

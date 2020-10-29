@@ -14,7 +14,7 @@ public class OutputFileWriter {
 		this.outputFile = outputFile;
 	}
 
-	public void write(double[] result) {
+	public void write(LinearEquation linearEquation) {
 
 		try {
 
@@ -24,12 +24,26 @@ public class OutputFileWriter {
 
 			formatter.setMinimumFractionDigits(1);
 
-			for (double variable : result) {
+			switch (linearEquation.getEquationResult()) {
 
-				writer.printf("%s\n", formatter.format(variable));
+			case NONE:
+				writer.write("No solutions");
+				break;
+
+			case ONE:
+
+				for (double variable : linearEquation.getResult()) {
+
+					writer.printf("%s\n", formatter.format(variable));
+				}
+
+				writer.close();
+				break;
+
+			case INFINITE:
+				writer.write("Infinitely many solutions");
+				break;
 			}
-
-			writer.close();
 
 		} catch (IOException e) {
 
