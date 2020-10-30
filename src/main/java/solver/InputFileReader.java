@@ -22,10 +22,10 @@ public class InputFileReader {
 			scanner = new Scanner(inputFile);
 
 			coefficientsNumber = scanner.nextInt();
+			int equationsNumber = scanner.nextInt();
+			equations = new Equation[equationsNumber];
 
-			equations = new Equation[coefficientsNumber];
-
-			for (int i = 0; i < coefficientsNumber; i++) {
+			for (int i = 0; i < equationsNumber; i++) {
 
 				double[] data = new double[coefficientsNumber + 1];
 

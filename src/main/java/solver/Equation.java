@@ -26,4 +26,24 @@ public class Equation {
 			coefficients[i] /= divider;
 		}
 	}
+
+	public boolean isZero() {
+
+		return areArgumentsZero() && isBZero();
+	}
+
+	public boolean areArgumentsZero() {
+
+		for (int i = 0; i < coefficients.length - 1; i++) {
+			if (coefficients[i] != 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean isBZero() {
+
+		return coefficients[coefficients.length - 1] == 0;
+	}
 }
