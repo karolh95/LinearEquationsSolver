@@ -36,14 +36,14 @@ public class OutputFileWriter {
 
 					writer.printf("%s\n", formatter.format(variable));
 				}
-
-				writer.close();
 				break;
 
 			case INFINITE:
 				writer.write("Infinitely many solutions");
 				break;
 			}
+			
+			writer.close();
 
 		} catch (IOException e) {
 
