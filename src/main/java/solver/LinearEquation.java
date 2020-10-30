@@ -4,17 +4,17 @@ public class LinearEquation {
 
 	private final int coefficientsNumber;
 	private final Equation[] equations;
-	
+
 	private EquationResult equationResult;
 
 	public LinearEquation(InputFileReader reader) {
 
 		this.coefficientsNumber = reader.getCoefficientsNumber();
 		this.equations = reader.getEquations();
-		
+
 		this.equationResult = EquationResult.NONE;
 	}
-	
+
 	public EquationResult getEquationResult() {
 		return equationResult;
 	}
@@ -32,29 +32,40 @@ public class LinearEquation {
 
 	public void solve() {
 
-		for (int column = 0; column < coefficientsNumber; column++) {
-			solveColumn(column);
-		}
+		reduceToEchelonMatrix();
+		backSolving();
 	}
 
-	private void solveColumn(int column) {
+	private void reduceToEchelonMatrix() {
 
-		double divider = getDiagonal(column);
-		equations[column].divide(divider);
+		for (int i = 0; i < equations.length; i++) {
 
-		for (int row = 0; row < coefficientsNumber; row++) {
+			Equation equation = equations[i];
 
-			if (row != column) {
+			for (int j = 0; j < i; j++) {
 
-				double multiplier = equations[row].get(column);
-				equations[row].subtract(equations[column], multiplier);
+				double multiplier = equation.get(j);
+				equation.subtract(equations[j], multiplier);
+			}
+
+			double divider = equation.get(i);
+			equation.divide(divider);
+		}
+
+	}
+
+	private void backSolving() {
+
+		for (int i = equations.length - 1; i >= 0; i--) {
+
+			Equation equation = equations[i];
+
+			for (int j = coefficientsNumber - 1; j > i; j--) {
+
+				double multiplier = equation.get(j);
+				equation.subtract(equations[j], multiplier);
 			}
 		}
-		
 		equationResult = EquationResult.ONE;
-	}
-
-	private double getDiagonal(int index) {
-		return equations[index].get(index);
 	}
 }
