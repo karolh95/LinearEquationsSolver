@@ -27,10 +27,10 @@ public class InputFileReader {
 
 			for (int i = 0; i < equationsNumber; i++) {
 
-				double[] data = new double[coefficientsNumber + 1];
+				Complex[] data = new Complex[coefficientsNumber + 1];
 
 				for (int j = 0; j < coefficientsNumber + 1; j++) {
-					data[j] = scanner.nextDouble();
+					data[j] = Complex.parseComplex(scanner.next());
 				}
 
 				equations[i] = new Equation(data);

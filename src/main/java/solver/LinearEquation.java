@@ -2,142 +2,146 @@ package solver;
 
 public class LinearEquation {
 
-	private final int coefficientsNumber;
-	private Equation[] equations;
+    private final int coefficientsNumber;
+    private Equation[] equations;
 
-	private EquationResult equationResult;
+    private EquationResult equationResult;
 
-	public LinearEquation(InputFileReader reader) {
+    public LinearEquation(InputFileReader reader) {
 
-		this.coefficientsNumber = reader.getCoefficientsNumber();
-		this.equations = reader.getEquations();
+        this.coefficientsNumber = reader.getCoefficientsNumber();
+        this.equations = reader.getEquations();
 
-		this.equationResult = EquationResult.NONE;
-	}
+        this.equationResult = EquationResult.NONE;
+    }
 
-	public EquationResult getEquationResult() {
-		return equationResult;
-	}
+    public EquationResult getEquationResult() {
+        return equationResult;
+    }
 
-	public double[] getResult() {
+    public Complex[] getResult() {
 
-		double[] result = new double[coefficientsNumber];
+        Complex[] result = new Complex[coefficientsNumber];
 
-		for (int i = 0; i < equations.length; i++) {
-			result[i] = equations[i].get(coefficientsNumber);
-		}
+        for (int i = 0; i < equations.length; i++) {
+            result[i] = equations[i].get(coefficientsNumber);
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	public void solve() {
+    public void solve() {
 
-		reduceToEchelonMatrix();
+        reduceToEchelonMatrix();
 
-		while (getLastEquation().isZero()) {
-			removeLastEquation();
-		}
+        while (getLastEquation().isZero()) {
+            removeLastEquation();
+        }
 
-		if (isTriangular()) {
-			backSolving();
+        if (isTriangular() && !getLastEquation().areArgumentsZero()) {
+            backSolving();
 
-		} else if (getLastEquation().areArgumentsZero() && !getLastEquation().isBZero()) {
-			equationResult = EquationResult.NONE;
+        } else if (getLastEquation().areArgumentsZero() && !getLastEquation().isBZero()) {
+            equationResult = EquationResult.NONE;
 
-		} else if (equations.length < coefficientsNumber) {
-			equationResult = EquationResult.INFINITE;
-		}
+        } else if (equations.length < coefficientsNumber) {
+            equationResult = EquationResult.INFINITE;
+        }
 
-	}
+    }
 
-	private void reduceToEchelonMatrix() {
+    private void reduceToEchelonMatrix() {
 
-		for (int i = 0; i < equations.length; i++) {
+        for (int i = 0; i < equations.length; i++) {
 
-			tryToSwapEquations(i);
+            tryToSwapEquations(i);
 
-			divide(i);
+            if (equations[i].get(i).isZero()) {
+                break;
+            }
 
-			for (int j = i + 1; j < equations.length; j++) {
+            divide(i);
 
-				subtract(j, i);
-			}
+            for (int j = i + 1; j < equations.length; j++) {
 
-		}
+                subtract(j, i);
+            }
 
-	}
+        }
 
-	private void tryToSwapEquations(int i) {
+    }
 
-		int j = i + 1;
+    private void tryToSwapEquations(int i) {
 
-		while (equations[i].get(i) == 0 && j < equations.length) {
+        int j = i + 1;
 
-			if (equations[j].get(i) != 0) {
+        while (equations[i].get(i).isZero() && j < equations.length) {
 
-				swap(i, j);
-			}
-			j++;
-		}
-	}
+            if (!equations[j].get(i).isZero()) {
 
-	private void swap(int i, int j) {
+                swap(i, j);
+            }
+            j++;
+        }
+    }
 
-		System.out.printf("R%d <-> R%d\n", i + 1, j + 1);
+    private void swap(int i, int j) {
 
-		Equation tmp = equations[i];
-		equations[i] = equations[j];
-		equations[j] = tmp;
-	}
+        System.out.printf("R%d <-> R%d\n", i + 1, j + 1);
 
-	private void subtract(int i, int j) {
+        Equation tmp = equations[i];
+        equations[i] = equations[j];
+        equations[j] = tmp;
+    }
 
-		double multiplier = equations[i].get(j);
+    private void subtract(int i, int j) {
 
-		if (multiplier != 0) {
+        Complex multiplier = equations[i].get(j);
 
-			equations[i].subtract(equations[j], multiplier);
-			System.out.printf("%.2f * R%d + R%d -> R%d\n", -multiplier, j + 1, i + 1, i + 1);
-		}
-	}
+        if (!multiplier.isZero()) {
 
-	private void divide(int i) {
+            System.out.printf("%s * R%d + R%d -> R%d\n", multiplier.getConjugate(), j + 1, i + 1, i + 1);
+            equations[i].subtract(equations[j], multiplier);
+        }
+    }
 
-		double divider = equations[i].get(i);
-		if (divider != 1 && divider != 0) {
+    private void divide(int i) {
 
-			equations[i].divide(divider);
-			System.out.printf("R%d / %.2f -> R%d\n", i + 1, divider, i + 1);
-		}
-	}
+        Complex divider = equations[i].get(i);
+        if (!divider.isOne() && !divider.isZero()) {
 
-	private boolean isTriangular() {
+            System.out.printf("R%d / %s -> R%d\n", i + 1, divider, i + 1);
+            equations[i].divide(divider);
+        }
+    }
 
-		return (coefficientsNumber == equations.length);
-	}
+    private boolean isTriangular() {
 
-	private void removeLastEquation() {
+        return (coefficientsNumber == equations.length);
+    }
 
-		int newEquationsNumber = equations.length - 1;
-		Equation[] temp = new Equation[newEquationsNumber];
+    private void removeLastEquation() {
 
-		System.arraycopy(equations, 0, temp, 0, newEquationsNumber);
-		equations = temp;
-	}
+        int newEquationsNumber = equations.length - 1;
+        Equation[] temp = new Equation[newEquationsNumber];
 
-	private void backSolving() {
+        System.arraycopy(equations, 0, temp, 0, newEquationsNumber);
+        equations = temp;
+    }
 
-		for (int i = equations.length - 1; i >= 0; i--) {
+    private void backSolving() {
 
-			for (int j = coefficientsNumber - 1; j > i; j--) {
+        for (int i = equations.length - 1; i >= 0; i--) {
 
-				subtract(i, j);
-			}
-		}
-		equationResult = EquationResult.ONE;
-	}
+            for (int j = coefficientsNumber - 1; j > i; j--) {
 
-	private Equation getLastEquation() {
-		return equations[equations.length - 1];
-	}
+                subtract(i, j);
+            }
+        }
+        equationResult = EquationResult.ONE;
+    }
+
+    private Equation getLastEquation() {
+        return equations[equations.length - 1];
+    }
 }

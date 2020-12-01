@@ -32,7 +32,7 @@ public class OutputFileWriter {
 
 			case ONE:
 
-				for (double variable : linearEquation.getResult()) {
+				for (Complex variable : linearEquation.getResult()) {
 
 					writer.printf("%s\n", formatter.format(variable));
 				}

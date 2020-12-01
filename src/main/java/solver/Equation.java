@@ -2,48 +2,50 @@ package solver;
 
 public class Equation {
 
-	private final double[] coefficients;
+    private final Complex[] coefficients;
 
-	public Equation(double[] coefficients) {
+    public Equation(Complex[] coefficients) {
 
-		this.coefficients = coefficients;
-	}
+        this.coefficients = coefficients;
+    }
 
-	public double get(int index) {
-		return coefficients[index];
-	}
+    public Complex get(int index) {
+        return coefficients[index];
+    }
 
-	public void subtract(Equation equation, double multiplier) {
+    public void subtract(Equation equation, Complex multiplier) {
 
-		for (int i = 0; i < coefficients.length; i++) {
-			coefficients[i] -= multiplier * equation.get(i);
-		}
-	}
+        for (int i = 0; i < coefficients.length; i++) {
 
-	public void divide(double divider) {
+            Complex s = multiplier.multiply(equation.get(i));
+            coefficients[i] = coefficients[i].subtract(s);
+        }
+    }
 
-		for (int i = 0; i < coefficients.length; i++) {
-			coefficients[i] /= divider;
-		}
-	}
+    public void divide(Complex divider) {
 
-	public boolean isZero() {
+        for (int i=0; i<coefficients.length; i++){
+            coefficients[i] = coefficients[i].divide(divider);
+        }
+    }
 
-		return areArgumentsZero() && isBZero();
-	}
+    public boolean isZero() {
 
-	public boolean areArgumentsZero() {
+        return areArgumentsZero() && isBZero();
+    }
 
-		for (int i = 0; i < coefficients.length - 1; i++) {
-			if (coefficients[i] != 0) {
-				return false;
-			}
-		}
-		return true;
-	}
+    public boolean areArgumentsZero() {
 
-	public boolean isBZero() {
+        for (int i = 0; i < coefficients.length - 1; i++) {
+            if (!coefficients[i].isZero()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-		return coefficients[coefficients.length - 1] == 0;
-	}
+    public boolean isBZero() {
+
+        return coefficients[coefficients.length - 1].isZero();
+    }
 }
