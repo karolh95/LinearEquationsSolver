@@ -20,3 +20,7 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
   Learn to handle special cases where there is no or infinite possible solutions for the equations.
 - [x] **Stage 5/5: Complex numbers**  
   Finally, teach your program to solve equations with complex numbers.
+
+## Demonstration
+
+![Demonstration](demonstration1.gif)
