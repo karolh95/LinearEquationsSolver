@@ -10,22 +10,22 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
 
 ## What you’ll do and what you’ll learn
 
-- [x] [**Stage 1/5: Simple and real**](#stage-15-simple-and-real)  
+- [x] [**Simple and real**](#simple-and-real)  
   Start with real numbers and simple equations of ![ax=b](src/images/stage1/axb.png) type.
-- [x] [**Stage 2/5: X and Y**](#stage-25-x-and-y)  
+- [x] [**X and Y**](#x-and-y)  
   Enable the program to solve systems with two variables.
-- [x] [**Stage 3/5: Equations**](#stage-35-equations)  
+- [x] [**Equations**](#equations)  
   Practice working with multidimensional arrays, files and the command line: get data from a file and solve multiple linear equations
-- [x] [**Stage 4/5: When things get complicated**](#stage-45-when-things-get-complicated)  
+- [x] [**When things get complicated**](#when-things-get-complicated)  
   Learn to handle special cases where there is no or infinite possible solutions for the equations.
-- [x] [**Stage 5/5: Complex numbers**](#stage-55-complex-numbers)  
+- [x] [**Complex numbers**](#complex-numbers)  
   Finally, teach your program to solve equations with complex numbers.
 
 ## Demonstration
 
 ![Demonstration](demonstration1.gif)
 
-## **Stage 1/5: Simple and real**
+## Simple and real
 
 A linear equation is an equation for a straight line, often presented as ![equation1](src/images/stage1/equation1.png). It is called linear because it contains only variables to the power of 1. The ***x*** and ***y*** above are these variables, while ***a*** and ***b*** are called coefficients.
 
@@ -35,7 +35,7 @@ Write a program that solves the equation ![ax=b](src/images/stage1/axb.png).
 
 Numbers ***a*** and ***b*** should be read from the first line of the standard input. You should output the value ***x***, with which the equation is true. For example, if the input contains numbers ***5*** and ***3***, this means that you should interpret this as an equation ![5*x=6](src/images/stage1/5x3.png). For this example, the answer would be **0.6** since ![5*0.6=3](src/images/stage1/5063.png).
 
-## **Stage 2/5: X and Y**
+## X and Y
 
 Let's solve the problem with one additional variable and one additional equation. The variables would be ***x*** and ***y***. In general this equation would look like this:
 
@@ -67,7 +67,7 @@ Now, you can find the ***x*** value from the first equation since you know the *
 
 The first line of the input contains numbers ***a, b, c***. The second line of the input contains numbers ***d, e, f***. All 6 numbers are doubles. You should output the solution: ***x*** and ***y*** in a single line.
 
-## **Stage 3/5: Equations**
+## Equations
 
 In this stage, the problem becomes more difficult. You should generalize the solution for any amount of variables. The important part is to understand that in most cases if the number of equations equals the number of variables there is only one solution. We will consider special cases in the next stage.
 
@@ -100,7 +100,7 @@ The coefficients are named ![ai1](src/images/stage3/ai1.png), ![ai2](src/images/
  
  The first line of the file should contain the number **N**, a number of variables and also a number of equations. Every other **N** lines contain **N+1** numbers, i.e. **N** coefficients of the current row and a constant as the last number in this line. The program also should output all rows manipulation it is doing when solving a system of linear equations.
  
-## Stage 4/5: When things get complicated
+## When things get complicated
  
 This stage is devoted to various special cases of the algorithm.
  
@@ -168,7 +168,7 @@ Write to file only `No solutions` or `Infinitely many solutions` if that's the c
  
 Don't forget that input can contain floating-point numbers.
 
-## Stage 5/5: Complex numbers
+## Complex numbers
 
 In this stage you should implement the ability to work with complex numbers. A set of complex numbers is wider set than a set of real numbers.
 
