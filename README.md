@@ -11,7 +11,7 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
 ## What you’ll do and what you’ll learn
 
 - [x] [**Stage 1/5: Simple and real**](#stage-15-simple-and-real)  
-  Start with real numbers and simple equations of (a*x = b) type.
+  Start with real numbers and simple equations of ![ax=b](src/images/stage1/axb.png) type.
 - [x] [**Stage 2/5: X and Y**](#stage-25-x-and-y)  
   Enable the program to solve systems with two variables.
 - [x] [**Stage 3/5: Equations**](#stage-35-equations)  
@@ -27,13 +27,13 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
 
 ## **Stage 1/5: Simple and real**
 
-A linear equation is an equation for a straight line, often presented as `y = ax + b`. It is called linear because it contains only variables to the power of 1. The ***x*** and ***y*** above are these variables, while ***a*** and ***b*** are called coefficients.
+A linear equation is an equation for a straight line, often presented as ![equation1](src/images/stage1/equation1.png). It is called linear because it contains only variables to the power of 1. The ***x*** and ***y*** above are these variables, while ***a*** and ***b*** are called coefficients.
 
 Linear equations can be found in different fields of science and technology. You can find some basic examples here. In this project, you will write a lot more powerful solver, but in this stage, you will start with a simple one.
 
-Write a program that solves the equation `a*x = b`.
+Write a program that solves the equation ![ax=b](src/images/stage1/axb.png).
 
-Numbers ***a*** and ***b*** should be read from the first line of the standard input. You should output the value ***x***, with which the equation is true. For example, if the input contains numbers ***5*** and ***3***, this means that you should interpret this as an equation `5*x=3`. For this example, the answer would be `0.6` since `5*0.6=3`.
+Numbers ***a*** and ***b*** should be read from the first line of the standard input. You should output the value ***x***, with which the equation is true. For example, if the input contains numbers ***5*** and ***3***, this means that you should interpret this as an equation ![5*x=6](src/images/stage1/5x3.png). For this example, the answer would be **0.6** since ![5*0.6=3](src/images/stage1/5063.png).
 
 ## **Stage 2/5: X and Y**
 
