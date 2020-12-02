@@ -14,7 +14,7 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
   Start with real numbers and simple equations of (a*x = b) type.
 - [x] [**Stage 2/5: X and Y**](#stage-25-x-and-y)  
   Enable the program to solve systems with two variables.
-- [x] **Stage 3/5: Equations**  
+- [x] [**Stage 3/5: Equations**](#stage-35-equations)  
   Practice working with multidimensional arrays, files and the command line: get data from a file and solve multiple linear equations
 - [x] **Stage 4/5: When things get complicated**  
   Learn to handle special cases where there is no or infinite possible solutions for the equations.
@@ -67,3 +67,37 @@ Now, you can find the ***x*** value from the first equation since you know the *
 
 The first line of the input contains numbers ***a, b, c***. The second line of the input contains numbers ***d, e, f***. All 6 numbers are doubles. You should output the solution: ***x*** and ***y*** in a single line.
 
+## **Stage 3/5: Equations**
+
+In this stage, the problem becomes more difficult. You should generalize the solution for any amount of variables. The important part is to understand that in most cases if the number of equations equals the number of variables there is only one solution. We will consider special cases in the next stage.
+
+Such multiple linear equations connected together are called a system of linear equations.
+
+You can see an example of the general system of linear equations below. The variables are named ![x1](src/images/stage3/x1.png), ![x2](src/images/stage3/x2.png), ..., ![xn](src/images/stage3/xn.png) 
+The coefficients are named ![ai1](src/images/stage3/ai1.png), ![ai2](src/images/stage3/ai2.png), ..., ![ain](src/images/stage3/ain.png) for the *i*-th row. And the constants are named ![b1](src/images/stage3/b1.png), ![b2](src/images/stage3/b2.png), ..., ![bn](src/images/stage3/bn.png).
+ 
+![Equation1](src/images/stage3/equation1.png)
+ 
+ Firstly, the algorithm should null the first column of coefficients except for the first coefficient, which should be equal to 1. Notice letters **c** and **d** instead of **a** and **b**. It means that through some calculations these coefficients became other coefficients and thus we cannot use letters **a** and **b** since they refer to the initial coefficients.
+ 
+ ![Equation2](src/images/stage3/equation2.png)
+ 
+ After that, you need to null the second column all the way from the third row. The second row should contain the coefficient equal to 1.
+ 
+ ![Equation3](src/images/stage3/equation3.png)
+ 
+ The same goes for the rest of the columns. In the end, you should get something like that:
+ 
+ ![Equation4](src/images/stage3/equation4.png)
+ 
+ The second part of the algorithm is to iterate rows from the last to the first and null the top part of the linear system. In the end, there should be only diagonal elements of the linear system.
+ 
+ ![Equation5](src/images/stage3/equation5.png)
+ 
+ And the right part of the system is the solution to this system.
+ 
+ In this stage, you need to write a program that reads coefficients from a file, solves the system of linear equations, and writes the answer to another file. You should pass paths to files using command-line arguments. Write to the file only answers separated by `\n`. Output all the steps only to the console, not in the file.
+ 
+ The first line of the file should contain the number **N**, a number of variables and also a number of equations. Every other **N** lines contain **N+1** numbers, i.e. **N** coefficients of the current row and a constant as the last number in this line. The program also should output all rows manipulation it is doing when solving a system of linear equations.
+ 
+ 
