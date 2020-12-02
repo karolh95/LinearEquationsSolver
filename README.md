@@ -18,7 +18,7 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
   Practice working with multidimensional arrays, files and the command line: get data from a file and solve multiple linear equations
 - [x] [**Stage 4/5: When things get complicated**](#stage-45-when-things-get-complicated)  
   Learn to handle special cases where there is no or infinite possible solutions for the equations.
-- [x] **Stage 5/5: Complex numbers**  
+- [x] [**Stage 5/5: Complex numbers**](#stage-55-complex-numbers)  
   Finally, teach your program to solve equations with complex numbers.
 
 ## Demonstration
@@ -167,4 +167,15 @@ In this stage you should write a program that handles all these nuances.
 Write to file only `No solutions` or `Infinitely many solutions` if that's the case. If there is a single solution you should write to file only ![x1](src/images/stage3/x1.png), ![x2](src/images/stage3/x2.png), ..., ![xn](src/images/stage3/xn.png), and every number should be on a separate line.
  
 Don't forget that input can contain floating-point numbers.
+
+## Stage 5/5: Complex numbers
+
+In this stage you should implement the ability to work with complex numbers. A set of complex numbers is wider set than a set of real numbers.
+
+You can read the complex number in the following way: a double number, then a plus or a minus, then another double number then a symbol `i`. If there is no plus nor minus then the number has an imaginary part equal to zero. If there is no plus nor minus but the number ends with i, then the number has a real part equal to zero. Also, if there is `1` before `i` like in `2+1i` or `-1i` then `1` can be omitted like in `2+i` and `-i`.
+
+Remember that you should write to file `No solutions` or `Infinitely many solutions` or the solution. Every variable of the solution should be on a separate line and there shouldn't be any spacebars (real part, plus/minus, imaginary part).
+
+If a real part of a number is equal to zero you should write only an imaginary part and in case an imaginary part also equals zero then you should simply write `0`. Also, if an imaginary part is equal to zero then write only a real part. If an imaginary part is equal to `1` then write `i` instead of `1i`, like in the parsing examples above.
+
 
