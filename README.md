@@ -23,7 +23,7 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
 
 ## Demonstration
 
-![Demonstration](demonstration1.gif)
+![Demonstration](src/images/demonstration1.gif)
 
 ## Simple and real
 
