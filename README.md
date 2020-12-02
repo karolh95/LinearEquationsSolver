@@ -39,29 +39,29 @@ Numbers ***a*** and ***b*** should be read from the first line of the standard i
 
 Let's solve the problem with one additional variable and one additional equation. The variables would be ***x*** and ***y***. In general this equation would look like this:
 
-![Equation1](src/images/stage2/E1.png)
+![Equation1](src/images/stage2/equation1.png)
 
 Where ***a, b, c, d, e, f*** are numbers. The general algorithm is to separate the variables so that the first variable is solved in the first line and the second variable is solved in the second line.
 
 The main concept here is to subtract rows. You already know how to subtract numbers and subtraction of rows is pretty similar. Below is an example in which we subtract the first row from the second one.
 
-![Equation2](src/images/stage2/E2.png)
+![Equation2](src/images/stage2/equation2.png)
 
-As you can see, we subtract `ax + by` from the left side of the second equation and also subtract ***c*** from the right side that equation. Since we subtracted equal amounts from both sides, the equation remains correct. You also can simplify this as shown below:
+As you can see, we subtract ![ax+by](src/images/stage2/axby.png) from the left side of the second equation and also subtract ![c](src/images/stage2/c.png) from the right side that equation. Since we subtracted equal amounts from both sides, the equation remains correct. You also can simplify this as shown below:
 
-![Equation3](src/images/stage2/E3.png)
+![Equation3](src/images/stage2/equation3.png)
 
-However, this all comes together when you realize you can subtract only a part of an equation. Let's subtract the first equation multiplied by `d / a` from the second equation.
+However, this all comes together when you realize you can subtract only a part of an equation. Let's subtract the first equation multiplied by ![da](src/images/stage2/da.png) from the second equation.
 
-![Equation4](src/images/stage2/E4.png)
+![Equation4](src/images/stage2/equation4.png)
 
-Notice that `d - a *d / a` becomes `d - d` and becomes ***0***. Therefore, we can exclude ***x*** from the second equation.
+Notice that ![d1](src/images/stage2/d1.png) becomes ![d2](src/images/stage2/d2.png) and becomes ***0***. Therefore, we can exclude ***x*** from the second equation.
 
-![Equation5](src/images/stage2/E5.png)
+![Equation5](src/images/stage2/equation5.png)
 
-And there we can find the ***y*** value. Just divide both sides by `e - b * d / a`.
+And there we can find the ***y*** value. Just divide both sides by ![e](src/images/stage2/e.png).
 
-![Equation6](src/images/stage2/E6.png)
+![Equation6](src/images/stage2/equation6.png)
 
 Now, you can find the ***x*** value from the first equation since you know the ***y*** value. This is a similar problem like in the previous stage.
 
