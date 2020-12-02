@@ -16,7 +16,7 @@ Practice the ever-useful essentials (classes, arrays, files) and learn to handle
   Enable the program to solve systems with two variables.
 - [x] [**Stage 3/5: Equations**](#stage-35-equations)  
   Practice working with multidimensional arrays, files and the command line: get data from a file and solve multiple linear equations
-- [x] **Stage 4/5: When things get complicated**  
+- [x] [**Stage 4/5: When things get complicated**](#stage-45-when-things-get-complicated)  
   Learn to handle special cases where there is no or infinite possible solutions for the equations.
 - [x] **Stage 5/5: Complex numbers**  
   Finally, teach your program to solve equations with complex numbers.
@@ -100,4 +100,71 @@ The coefficients are named ![ai1](src/images/stage3/ai1.png), ![ai2](src/images/
  
  The first line of the file should contain the number **N**, a number of variables and also a number of equations. Every other **N** lines contain **N+1** numbers, i.e. **N** coefficients of the current row and a constant as the last number in this line. The program also should output all rows manipulation it is doing when solving a system of linear equations.
  
+## Stage 4/5: When things get complicated
  
+This stage is devoted to various special cases of the algorithm.
+ 
+Firstly, let's take a look at the first stage of the algorithm. In it you should change the first row in a way that the first element of the row is equal to 1. But what if the first element of the row is 0? Any multiplications of such row would never produce the first element equal to 1 because it would always be 0.
+ 
+![equation1](src/images/stage4/equation1.png)
+ 
+Because of that, you need to modify the algorithm. All rules will follow the example of a system of linear equations. The question marks next to the coefficients mean any value. The coefficients highlighted in red mean the ones mentioned in the rule.
+ 
+1. Before scaling the current row you should check if the corresponding element of the row isn't 0.
+ 
+    ![equation2](src/images/stage4/equation2.png)
+ 
+2. If the coefficient is zero, the program should look for a non-zero coefficient under this coefficient. If such a coefficient is found in some other row, you should swap that row with the current one. In the example below, rows 3 and 5 have been swapped.
+ 
+    ![equation3](src/images/stage4/equation3.png)
+    
+    ![equation4](src/images/stage4/equation4.png)
+    
+    ![equation5](src/images/stage4/equation5.png)
+ 
+3. If all the coefficients below the element are zero, you should look for a non-zero coefficient to the right of the current one. If such a coefficient is found in some other column, you should swap that column with the current one. Don't forget to swap because in the end you need to swap them back to output the solutions in the right order. There could be a lot of swaps. In the example below, rows 3 and 4 have been swapped.
+ 
+    ![equation6](src/images/stage4/equation6.png)
+    
+    ![equation7](src/images/stage4/equation7.png)
+    
+    ![equation8](src/images/stage4/equation8.png)
+ 
+4. If all the coefficients below and to the right of the element are zero, you should find the non-zero element in the whole bottom-left part of the linear system. If such a coefficient is found in some other row and column, you should swap both those row and column so that this non-zero element is in place of the current element. Also, don't forget to remember the column's swap. In the example below, rows 3 and 4 and columns 3 and 5 have been swapped.
+ 
+    ![equation9](src/images/stage4/equation9.png)
+    
+    ![equation10](src/images/stage4/equation10.png)
+    
+    ![equation11](src/images/stage4/equation11.png)
+ 
+5. If there are no such elements in the whole bottom-left part of the linear system, you should end the first part of the algorithm.
+    
+    After all the manipulations in the first half of the algorithm, check the possibility of no solutions. It is possible when there is an all-zero row and a constant is not equal to zero. You can see the example below. In this case, a linear system contains a contradiction and therefore has no solution. In this case, you can end the algorithm.
+ 
+![equation12](src/images/stage4/equation12.png)
+ 
+Secondly, in the linear system the amount of variables and amount of equations don't need to be equal.
+ 
+A number of significant equations is equal to the number of non-zero rows in the linear system. A number of significant variables is equal to the number of all columns in the linear system. After that, you can determine if the linear system has an infinite amount of solutions or a single one.
+ 
+The following variants are possible:
+ 
+1. The number of significant equations is equal to the number of significant variables. There is only one solution, you can find it like in the previous stage. Possible examples are shown below:
+ 
+    ![equation13](src/images/stage4/equation13.png)
+ 
+2. The number of significant equations is less than the number of significant variables. There is an infinite number of solutions. Possible examples are shown below:
+ 
+    ![equation14](src/images/stage4/equation14.png)
+    
+    ![equation15](src/images/stage4/equation15.png)
+ 
+Note that there can't be a case in which the number of significant equations is greater than the number of significant variables because in this case there would be a contradiction we've handled in the previous steps of the algorithm.
+ 
+In this stage you should write a program that handles all these nuances.
+ 
+Write to file only `No solutions` or `Infinitely many solutions` if that's the case. If there is a single solution you should write to file only ![x1](src/images/stage3/x1.png), ![x2](src/images/stage3/x2.png), ..., ![xn](src/images/stage3/xn.png), and every number should be on a separate line.
+ 
+Don't forget that input can contain floating-point numbers.
+
